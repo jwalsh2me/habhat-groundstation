@@ -38,7 +38,7 @@ while True:
     
     while InComm.in_waiting > 0:  # Check for available data
         received_data = InComm.readline().decode('utf-8').rstrip('\n')  # Read and decode
-        LogUplinkedCommands(received_data)  # Log the received line
+        # LogUplinkedCommands(received_data)  # Log the received line
         print(received_data)
 
-    time.sleep(delay)
+    # time.sleep(delay)
