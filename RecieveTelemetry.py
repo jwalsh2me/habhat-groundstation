@@ -23,4 +23,6 @@ ser = serial.Serial('/dev/ttyUSB0', 9600, 8, 'N', 1, timeout=20)
 # while True:
 #     print(ser.readline())
 telemetry = ser.readline()
-print(telemetry)
+dline = telemetry.decode('utf-8')
+print(dline)
+
