@@ -4,6 +4,8 @@ import serial
 import time
 import datetime
 
+delay = 1
+
 def GenerateChecksum(DataToChecksum):
     payload = DataToChecksum[1:]
     checksum = 0
@@ -11,7 +13,11 @@ def GenerateChecksum(DataToChecksum):
         checksum =  checksum ^ ord(payload[i])
     return ("%02X" % checksum)
 
-
+def LogUplinkedCommands(data):
+    with open(UplinkedCommands, 'a') as txtfile:  # Open in append mode
+        txtfile.write(data + '\r\n')   
+        
+        
 time.sleep(1)
 
 
@@ -19,12 +25,19 @@ file_time  = datetime.datetime.now().strftime('%m_%d_%Y_%H_%M_%S')
 print(file_time)
 
 # ser = serial.Serial('/dev/ttyUSB0', 9600, 8, 'N', 1, timeout=20)
-ser = serial.Serial('/dev/ttyUSB0', 9600)
-
+# ser = serial.Serial('/dev/ttyUSB0', 9600)
+OutComm = serial.Serial('/dev/ttyUSB0', 9600)
 
 # while True:
 #     print(ser.readline())
-telemetry = ser.readline()
-dline = telemetry.decode('utf-8')
-print(dline)
+# telemetry = ser.readline()
+# dline = telemetry.decode('utf-8')
+# print(dline)
 
+# while True:
+    
+while OutComm.in_waiting > 0:  # Check for available data
+    received_data = OutComm.readline().decode('utf-8').rstrip('\n')  # Read and decode
+    LogUplinkedCommands(received_data)  # Log the received line
+
+time.sleep(delay)
