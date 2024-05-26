@@ -18,7 +18,9 @@ time.sleep(1)
 file_time  = datetime.datetime.now().strftime('%m_%d_%Y_%H_%M_%S') 
 print(file_time)
 
-ser = serial.Serial('/dev/ttyUSB0', 9600, 8, 'N', 1, timeout=20)
+# ser = serial.Serial('/dev/ttyUSB0', 9600, 8, 'N', 1, timeout=20)
+ser = serial.Serial('/dev/ttyUSB0', 9600)
+
 
 # while True:
 #     print(ser.readline())
