@@ -26,7 +26,7 @@ print(file_time)
 
 # ser = serial.Serial('/dev/ttyUSB0', 9600, 8, 'N', 1, timeout=20)
 # ser = serial.Serial('/dev/ttyUSB0', 9600)
-OutComm = serial.Serial('/dev/ttyUSB0', 9600)
+InComm = serial.Serial('/dev/ttyUSB0', 9600)
 
 # while True:
 #     print(ser.readline())
@@ -34,10 +34,11 @@ OutComm = serial.Serial('/dev/ttyUSB0', 9600)
 # dline = telemetry.decode('utf-8')
 # print(dline)
 
-# while True:
+while True:
     
-while OutComm.in_waiting > 0:  # Check for available data
-    received_data = OutComm.readline().decode('utf-8').rstrip('\n')  # Read and decode
-    LogUplinkedCommands(received_data)  # Log the received line
+    while InComm.in_waiting > 0:  # Check for available data
+        received_data = OutComm.readline().decode('utf-8').rstrip('\n')  # Read and decode
+        LogUplinkedCommands(received_data)  # Log the received line
+        print(received_data)
 
-time.sleep(delay)
+    time.sleep(delay)
