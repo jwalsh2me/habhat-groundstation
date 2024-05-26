@@ -20,6 +20,7 @@ print(file_time)
 
 ser = serial.Serial('/dev/ttyUSB0', 9600, 8, 'N', 1, timeout=20)
 
-while True:
-    print(ser.readline())
-    telemetry = ser.readline()
+# while True:
+#     print(ser.readline())
+telemetry = ser.readline()
+print(telemetry)
